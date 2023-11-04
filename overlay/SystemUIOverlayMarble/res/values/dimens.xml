@@ -27,4 +27,6 @@
          @dimen/physical_fingerprint_sensor_center_screen_location_y
     </dimen>
 
+     <!--  Blur radius on status bar window and power menu  -->
+     <dimen name="max_window_blur_radius">200px</dimen>
 </resources>

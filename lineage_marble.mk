@@ -20,6 +20,15 @@ $(call inherit-product-if-exists, vendor/$(TARGET_ROM_SOURCE)/config.mk)
 # Inherit from marble device.
 $(call inherit-product, device/xiaomi/marble/marble.mk)
 
+# Blur
+TARGET_SUPPORTS_BLUR := true
+ifeq ($(TARGET_SUPPORTS_BLUR),true)
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    ro.sf.blurs_are_expensive=1 \
+    ro.surface_flinger.supports_background_blur=1 \
+    persist.sys.sf.disable_blurs=1
+endif
+
 ## Device identifier
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := marble
