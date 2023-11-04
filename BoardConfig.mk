@@ -103,6 +103,18 @@ TARGET_RECOVERY_DEVICE_MODULES ?= init_xiaomi_marble
 # Kernel
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_IMAGE_NAME := Image
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+
+TARGET_KERNEL_ARCH := arm64
+TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_KERNEL_CONFIG := marble_defconfig
+TARGET_KERNEL_SOURCE := kernel/xiaomi/marble
 
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
@@ -116,26 +128,20 @@ BOARD_BOOTCONFIG := \
     androidboot.usbcontroller=a600000.dwc3 \
     androidboot.init_fatal_reboot_target=recovery
 
-BOARD_BOOT_HEADER_VERSION := 4
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-
-BOARD_KERNEL_IMAGE_NAME := Image
-
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_RAMDISK_USE_LZ4 := true
-BOARD_USES_GENERIC_KERNEL_IMAGE := true
-
 # Kill lineage kernel build task while preserving kernel
 TARGET_NO_KERNEL_OVERRIDE := true
 
+# Prebuilt Kernel
+TARGET_PREBUILT_KERNEL := false
+ifeq ($(TARGET_PREBUILT_KERNEL),true)
 # Workaround to make lineage's soong generator work
 TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
-
 # Kernel Binary
 TARGET_KERNEL_VERSION := 5.10
 LOCAL_KERNEL := $(KERNEL_PATH)/Image
 PRODUCT_COPY_FILES += \
 	$(LOCAL_KERNEL):kernel
+endif
 
 # Kernel modules
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/vendor_ramdisk/modules.load))
