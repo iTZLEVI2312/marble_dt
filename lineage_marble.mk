@@ -29,6 +29,17 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
     persist.sys.sf.disable_blurs=1
 endif
 
+# MIUI Camera
+TARGET_BUILD_MIUICAM := true
+
+ifeq ($(TARGET_BUILD_MIUICAM),true)
+$(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
+
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.miui.notch=1 \
+    ro.product.mod_device=marble_global
+endif
+
 ## Device identifier
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := marble
