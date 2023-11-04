@@ -2,7 +2,7 @@
      Copyright (C) 2023 The LineageOS Project
      SPDX-License-Identifier: Apache-2.0
 -->
-<manifest version="1.0" type="device">
+<manifest version="2.0" type="device">
     <!-- NFC HAL service -->
     <hal format="hidl">
         <name>android.hardware.nfc</name>

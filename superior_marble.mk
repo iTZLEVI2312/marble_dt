@@ -9,7 +9,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Source
-TARGET_ROM_SOURCE := lineage
+TARGET_ROM_SOURCE := superior
 
 # Inherit some common vendor stuff.
 ifeq ($(TARGET_ROM_SOURCE),lineage)
@@ -28,6 +28,9 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
     ro.surface_flinger.supports_background_blur=1 \
     persist.sys.sf.disable_blurs=1
 endif
+
+TARGET_FACE_UNLOCK_SUPPORTED := true
+BOARD_USES_QCOM_HARDWARE := true
 
 # MIUI Camera
 TARGET_BUILD_MIUICAM := true

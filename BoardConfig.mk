@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
-
+TARGET_ROM_SOURCE := superior
 DEVICE_PATH := device/xiaomi/marble
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
@@ -32,7 +32,7 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := cortex-a76
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT := armv8-2a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a76
@@ -111,16 +111,16 @@ BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_RAMDISK_USE_LZ4 := true
 BOARD_USES_GENERIC_KERNEL_IMAGE := true
 
-TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CONFIG := marble_defconfig
-TARGET_KERNEL_SOURCE := kernel/xiaomi/marble
+#TARGET_KERNEL_ARCH := arm64
+#TARGET_KERNEL_CLANG_COMPILE := true
+#TARGET_KERNEL_CONFIG := marble_defconfig
+#TARGET_KERNEL_SOURCE := kernel/xiaomi/marble
 
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
     disable_dma32=on \
-    swinfo.fingerprint=$(LINEAGE_VERSION) \
-    mtdoops.fingerprint=$(LINEAGE_VERSION)
+    swinfo.fingerprint=$(SUPERIOR_VERSION) \
+    mtdoops.fingerprint=$(SUPERIOR_VERSION)
 
 BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
@@ -132,7 +132,7 @@ BOARD_BOOTCONFIG := \
 TARGET_NO_KERNEL_OVERRIDE := true
 
 # Prebuilt Kernel
-TARGET_PREBUILT_KERNEL := false
+TARGET_PREBUILT_KERNEL := true
 ifeq ($(TARGET_PREBUILT_KERNEL),true)
 # Workaround to make lineage's soong generator work
 TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
@@ -154,7 +154,6 @@ RECOVERY_MODULES := $(addprefix $(KERNEL_PATH)/vendor_ramdisk/, $(BOARD_VENDOR_R
 
 # Prevent duplicated entries (to solve duplicated build rules problem)
 BOARD_VENDOR_RAMDISK_KERNEL_MODULES := $(sort $(BOARD_VENDOR_RAMDISK_KERNEL_MODULES) $(RECOVERY_MODULES))
-
 # Vendor modules (installed to vendor_dlkm)
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/vendor_dlkm/modules.load))
 BOARD_VENDOR_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/vendor_dlkm/, $(BOARD_VENDOR_KERNEL_MODULES_LOAD))

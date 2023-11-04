@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/$(TARGET_ROM_SOURCE)_marble.mk
+    $(LOCAL_DIR)/superior_marble.mk
 
 COMMON_LUNCH_CHOICES := \
-    $(TARGET_ROM_SOURCE)_marble-eng \
-    $(TARGET_ROM_SOURCE)_marble-userdebug \
-    $(TARGET_ROM_SOURCE)_marble-user
+     superior_marble-eng \
+     superior_marble-userdebug \
+     superior_marble-user
